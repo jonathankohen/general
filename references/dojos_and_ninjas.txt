@@ -1,0 +1,33 @@
+Dojo.objects.create(name='Main', city='LA', state='WA')
+Dojo.objects.create(name='Another', city='Manhattan', state='NY')
+Dojo.objects.create(name='Black Belt', city='Boston', state='MA')
+
+c=Dojo.objects.all()
+c.delete()
+
+Dojo.objects.create(name='Main', city='LA', state='WA')
+Dojo.objects.create(name='Another', city='Manhattan', state='NY')
+Dojo.objects.create(name='Black Belt', city='Boston', state='MA')
+
+Ninja.objects.create(first_name='Jon', last_name='Kohen', dojo=Dojo.objects.get(id=4))
+Ninja.objects.create(first_name='Shane', last_name='Goldman', dojo=Dojo.objects.get(id=4))
+Ninja.objects.create(first_name='Drew', last_name='Cunningham', dojo=Dojo.objects.get(id=4))
+
+Ninja.objects.create(first_name='Lindsey', last_name='Black', dojo=Dojo.objects.get(id=5))
+Ninja.objects.create(first_name='Someone', last_name='McSomeone', dojo=Dojo.objects.get(id=5))
+Ninja.objects.create(first_name='Drew', last_name='Again', dojo=Dojo.objects.get(id=5))
+
+Ninja.objects.create(first_name='Don', last_name='McLean', dojo=Dojo.objects.get(id=6))
+Ninja.objects.create(first_name='Sarah', last_name='Jessica', dojo=Dojo.objects.get(id=6))
+Ninja.objects.create(first_name='Arthur', last_name='King of Wales', dojo=Dojo.objects.get(id=6))
+
+Ninja.objects.filter(dojo=Dojo.objects.get(id=4))
+
+Ninja.objects.filter(dojo=Dojo.objects.get(id=6))
+
+ninja = Ninja.objects.get(id=9)
+ninja.dojo
+
+Dojo.objects.create(name='New', city='Portland', state='OR', desc="Here's a new Dojo!")
+
+#

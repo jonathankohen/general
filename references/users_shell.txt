@@ -1,0 +1,30 @@
+User.objects.create(first_name='Jon', last_name='Kohen', email='something@something.com', age='88')
+
+User.objects.create(first_name='Kylo', last_name='Ren',
+                    email='firstorder@killthejedi.org', age='28')
+
+User.objects.create(first_name='Lily', last_name='Kohen',
+                    email='meow@MEOWWW.com', age='11')
+
+User.objects.all()
+    <QuerySet [<User: User object (1)>, <User: User object (2)>, <User: User object (3)>]>
+
+User.objects.last()
+    <User: User object (3)>
+
+User.objects.first()
+    <User: User object (1)>
+
+c = User.objects.get(id=3)
+c.last_name = "Pancakes"
+c.save()
+
+c = User.objects.get(id=2)
+c.delete()
+    (1, {'users_app.User': 1})
+
+User.objects.all().order_by("first_name").values()
+    <QuerySet [{'id': 1, 'first_name': 'Jon', 'last_name': 'Kohen', 'email': 'something@something.com', 'age': 88, 'created_at': datetime.date(2020, 8, 13), 'updated_at': datetime.date(2020, 8, 13)}, {'id': 3, 'first_name': 'Lily', 'last_name': 'Pancakes', 'email': 'meow@MEOWWW.com', 'age': 11, 'created_at': datetime.date(2020, 8, 13), 'updated_at': datetime.date(2020, 8, 13)}]>
+
+User.objects.all().order_by("-first_name").values()
+    <QuerySet [{'id': 3, 'first_name': 'Lily', 'last_name': 'Pancakes', 'email': 'meow@MEOWWW.com', 'age': 11, 'created_at': datetime.date(2020, 8, 13), 'updated_at': datetime.date(2020, 8, 13)}, {'id': 1, 'first_name': 'Jon', 'last_name': 'Kohen', 'email': 'something@something.com', 'age': 88, 'created_at': datetime.date(2020, 8, 13), 'updated_at': datetime.date(2020, 8, 13)}]>

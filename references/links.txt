@@ -1,0 +1,42 @@
+~Bootstrap
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+import 'bootstrap/dist/css/bootstrap.css';
+// Put any other imports below so that CSS from your
+// components takes precedence over default styles.
+(https://create-react-app.dev/docs/adding-bootstrap/)
+    
+Optional JavaScript
+jQuery first, then Popper.js, then Bootstrap JS
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+~jQuery
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+~Zoom
+https://codingdojo.zoom.us/j/725325338?pwd=UjhtKzJuaUZZeWU3ODZ2TlpndnI3dz09
+
+https://codingdojo.zoom.us/j/7330406448
+
+~git
+    - when starting a project from scratch, and tracking with git from the onset
+        cd into project
+        git init
+        !   write some code
+        git add .
+        git commit -m "first commit"
+        !   go to github, and create a repo
+        git remote add origin https://github.com/username/new_repo
+        git push -u origin master
+
+    - for an existing proj that you want to start tracking with git
+        cd into project
+        git init
+        git add .
+        git add .gitignore
+        git commit -m "first commit"
+        !   go to github, and create a repo
+        git remote add origin https://github.com/username/new_repo
+        git push -u origin master

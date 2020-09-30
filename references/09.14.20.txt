@@ -1,0 +1,141 @@
+> use my_first_db
+switched to db my_first_db
+> db.createCollection(first_collection)
+uncaught exception: ReferenceError: first_collection is not defined :
+@(shell):1:1
+> db.createCollection("first_collection")
+{ "ok" : 1 }
+> 
+> db.first_collection({name: 'Hannah', home_state: 'Montana', lucky_number: '8', birthday: {month: 04, day:08, year: 92}})
+uncaught exception: TypeError: db.first_collection is not a function :
+@(shell):1:1
+> db.first_collection.insert({name: 'Hannah', home_state: 'Montana', lucky_number: '8', birthday: {month: 04, day:08, year: 92}})
+WriteResult({ "nInserted" : 1 })
+> db.first_collection.insert({name: 'Jesse', home_state: 'Vermont', lucky_number: '22', birthday: {month: 05, day:10, year: 88}})
+WriteResult({ "nInserted" : 1 })
+> db.first_collection.insert({name: 'Peter', home_state: 'New Hampshire', lucky_number: '88', birthday: {month: 06, day:22, year: 92}})
+WriteResult({ "nInserted" : 1 })
+> db.first_collection.insert({name: 'Alice', home_state: 'New Jersey', lucky_number: '4', birthday: {month: 08, day:10, year: 94}})
+WriteResult({ "nInserted" : 1 })
+> db.first_collection.insert({name: 'Neal', home_state: 'Massachusetts', lucky_number: '2', birthday: {month: 06, day:24, year: 92}})
+WriteResult({ "nInserted" : 1 })
+> db.first_collection.find().pretty()
+{
+        "_id" : ObjectId("5f5fc94fd37a4041d444d89c"),
+        "name" : "Hannah",
+        "home_state" : "Montana",
+        "lucky_number" : "8",
+        "birthday" : {
+                "month" : 4,
+                "day" : 8,
+                "year" : 92
+        }
+}
+{
+        "_id" : ObjectId("5f5fc973d37a4041d444d89d"),
+        "name" : "Jesse",
+        "home_state" : "Vermont",
+        "lucky_number" : "22",
+        "birthday" : {
+                "month" : 5,
+                "day" : 10,
+                "year" : 88
+        }
+}
+{
+        "_id" : ObjectId("5f5fc9a9d37a4041d444d89e"),
+        "name" : "Peter",
+        "home_state" : "New Hampshire",
+        "lucky_number" : "88",
+        "birthday" : {
+                "month" : 6,
+                "day" : 22,
+                "year" : 92
+        }
+}
+{
+        "_id" : ObjectId("5f5fc9d1d37a4041d444d89f"),
+        "name" : "Alice",
+        "home_state" : "New Jersey",
+        "lucky_number" : "4",
+        "birthday" : {
+                "month" : 8,
+                "day" : 10,
+                "year" : 94
+        }
+}
+{
+        "_id" : ObjectId("5f5fc9f9d37a4041d444d8a0"),
+        "name" : "Neal",
+        "home_state" : "Massachusetts",
+        "lucky_number" : "2",
+        "birthday" : {
+                "month" : 6,
+                "day" : 24,
+                "year" : 92
+        }
+}
+> db.first_collection.find({home_state: "California"})
+> db.first_collection.find({home_state: "Washington"})
+> db.first_collection.find({lucky_number: {$gt: 3}})
+> db.first_collection.find({lucky_number: {$gt: 3}})
+> db.first_collection.find({lucky_number: {$gt: 1}})
+> db.first_collection.find().pretty()
+{
+        "_id" : ObjectId("5f5fc94fd37a4041d444d89c"),
+        "name" : "Hannah",
+        "home_state" : "Montana",
+        "lucky_number" : "8",
+        "birthday" : {
+                "month" : 4,
+                "day" : 8,
+                "year" : 92
+        }
+}
+{
+        "_id" : ObjectId("5f5fc973d37a4041d444d89d"),
+        "name" : "Jesse",
+        "home_state" : "Vermont",
+        "lucky_number" : "22",
+        "birthday" : {
+                "month" : 5,
+                "day" : 10,
+                "year" : 88
+        }
+}
+{
+        "_id" : ObjectId("5f5fc9a9d37a4041d444d89e"),
+        "name" : "Peter",
+        "home_state" : "New Hampshire",
+        "lucky_number" : "88",
+        "birthday" : {
+                "month" : 6,
+                "day" : 22,
+                "year" : 92
+        }
+}
+{
+        "_id" : ObjectId("5f5fc9d1d37a4041d444d89f"),
+        "name" : "Alice",
+        "home_state" : "New Jersey",
+        "lucky_number" : "4",
+        "birthday" : {
+                "month" : 8,
+                "day" : 10,
+                "year" : 94
+        }
+}
+{
+        "_id" : ObjectId("5f5fc9f9d37a4041d444d8a0"),
+        "name" : "Neal",
+        "home_state" : "Massachusetts",
+        "lucky_number" : "2",
+        "birthday" : {
+                "month" : 6,
+                "day" : 24,
+                "year" : 92
+        }
+}
+> db.first_collection.find({lucky_number: {$gt: 3}})
+> db.first_collection.find({lucky_number: 8})
+> 

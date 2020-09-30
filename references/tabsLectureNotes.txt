@@ -1,0 +1,121 @@
+~ TABS ASSIGNMENT
+structure:
+- Tab component
+- TabDisplay, or p tag. KISS. so probably just p tag
+
+state:
+- content for display is in state in app.js
+- which tab is selected will be managed by state in app.js as boolean
+! 3 state objects with both 'message' as string, 'isSelected' as boolean
+
+logic:
+- boolean conditional to make it false on all the ones not selected, and true for the one that is
+! use boolean to conditionally render display p content, and tab styles (or tab itself?)
+- if tab2 clicked, invert colors, setState of isSelected to false on tab1 and tab3, true to tab2
+- to implement isSelected, many ways. 
+    1) forEach 
+        a) can take the state, and do a forEach loop over it (tabs?), setting them all to false
+        b) find the index, change that one to true
+        c) work on display p next
+
+using state objects!
+=> ex/ 
+    const [todos, setToDos] = useState([
+        {
+            text: 'string',
+            isCompleted: false
+        },
+        {
+            text: 'diff string',
+            isCompleted: false
+        }
+    ])
+
+- mapping
+    <div className='app'>
+        <div className='todo-list'>
+            {todos.map(todo, index) => (
+                <Todo key={index} index={index} todo={todo} /> 
+            )}
+        </div>
+    </div>
+    
+
+- create functional component (goes above app func in this case)
+    function Todo({todo, index}) {
+        return <div className='todo'>{todo.text}</div>
+    }
+
+forms use their own state usually. value, setValue. onSubmit={handlesubmit}. 
+    input type value={value} (state) onChange={e => setValue(e.target.value)}
+
+handlesubmit 
+    e.prev 
+    if(!value) return
+    addTodo(value)
+    setValue('')
+
+form group of three submit buttons as tabs?
+
+
+
+
+! Mike's demo
+    - structure: 
+        STATE: 
+            tab1(index, text, selected)
+            tab2(index, text, selected)
+            tab3(index, text, selected)
+                header info
+                once inital state is written, we never have to touch it again
+        APP.JS:
+            controls changes of tab headers and display with state
+            3 tab header components 
+            display will be in app.js too
+            clickHandler here to keep it global
+            setTabs makes change to selected of the one tab
+                array1 = everything before changed tab
+                array2 = changed tab
+                array3 = everything after changed tab
+
+
+        TabHeader:
+            purely functional
+            needs to know if selected, and index
+            style based on conditional of props.selected 
+            button onclick anon func to pass arg to clickH
+
+
+
+=============================================================================================================
+
+Step 1: Break the UI into a component hierarchy 
+- Use the single responsibility principle to decide what will be a component
+- Draw boxes around every component(and subcomponent)
+- Arrange components into a hierarchy
+
+Step 2: Build a static version in react(renders your data model)
+- build a version that takes your data model and renders the UI but has no interactivity.
+- don’t use state
+- top-down or bottom-up (it’s usually easier to go top-down, and on larger projects, it’s easier to go bottom-up and write tests as you build.)
+- At the end of this step, you’ll have a library of reusable components that render your data model.
+
+Step 3: Identifying the minimal (but complete) Representation of UI state
+- Figure out the absolute minimal representation of the mutable state your application needs and compute everything else you need on-demand.
+- Think of all of the pieces of data in your application and figure out which one needs state:
+- ask the following question:
+    1. Is it passed in from a parent via props? If so, it probably isn’t state.
+    2. Does it remain unchanged over time? If so, it probably isn’t state.
+    3. Can you compute it based on any other state or props in your component? If so, it isn’t state.
+
+Step 4: Identify where your state should live.
+- For each piece of state in your application:
+    - Identify every component that renders something based on that state.
+    - Find a common owner component (a single component above all the components that need to use state in the hierarchy).
+    - Either the common owner or another component higher up in the hierarchy should own the state.
+    - if you can’t find a component where it makes sense to own the state, create a new component solely for holding the state and add it somewhere in the hierarchy above the common owner component.
+
+Step 5: Add inverse data Flow.
+- Support data flowing from lower components to higher ones
+    - Lift state
+    - Context Hooks

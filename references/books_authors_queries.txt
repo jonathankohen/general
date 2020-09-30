@@ -1,0 +1,57 @@
+Book.objects.create(title="C Sharp")
+Book.objects.create(title="Java")
+Book.objects.create(title="Python")
+Book.objects.create(title="PHP")
+Book.objects.create(title="Ruby")
+
+Author.objects.create(first_name="Jane", last_name="Austen")
+Author.objects.create(first_name="Emily", last_name="Dickinson")
+Author.objects.create(first_name="Fyodor", last_name="Dostoevsky")
+Author.objects.create(first_name="William", last_name="Shakespeare")
+Author.objects.create(first_name="Lau", last_name="Tzu")
+----
+cSharp = Book.objects.get(id=1)
+java = Book.objects.get(id=2)
+python = Book.objects.get(id=3)
+php = Book.objects.get(id=4)
+ruby = Book.objects.get(id=5)
+
+jane = Author.objects.get(id=1)
+emily_d = Author.objects.get(id=2)
+fyo = Author.objects.get(id=3)
+bill = Author.objects.get(id=4)
+tzu = Author.objects.get(id=5)
+----
+cSharp.title = "C#"
+cSharp.save()
+----
+bill.first_name = "Bill"
+bill.save()
+----
+cSharp.authors.add(jane)
+java.authors.add(jane)
+----
+cSharp.authors.add(emily_d)
+java.authors.add(emily_d)
+python.authors.add(emily_d)
+----
+cSharp.authors.add(fyo)
+java.authors.add(fyo)
+python.authors.add(fyo)
+php.authors.add(fyo)
+----
+cSharp.authors.add(tzu)
+java.authors.add(tzu)
+python.authors.add(tzu)
+php.authors.add(tzu)
+ruby.authors.add(tzu)
+----
+python.authors.all()
+----
+python.authors.remove(emily_d)
+----
+java.authors.add(tzu)
+----
+fyo.books.all()
+----
+php.authors.all()

@@ -1,0 +1,250 @@
+~INITIAL COMMANDS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+django-admin startproject PROJECT_NAME
+
+cd PROJECT_NAME
+
+python3 manage.py startapp APP_NAME
+
+------------------------------------------------- PROJECT SETTINGS
+INSTALLED_APPS = [
+    'your_app_name_here',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+------------------------------------------------- PROJECT FILE URLS.PY
+from django.urls import path, include
+
+urlpatterns = [
+    path('', include('dojo_survey.urls')),
+]
+
+------------------------------------------------- APP FILE URLS.PY (CREATE)
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index),
+]
+
+------------------------------------------------- APP VIEWS.PY FILE
+from django.shortcuts import render, HttpResponse
+
+def index(request):
+    return HttpResponse("Welcome!")
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ MIGRATE
+python3 manage.py migrate
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RUN SERVER
+python3 manage.py runserver
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ STATIC FILES HTML CODE
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ SESSION
+def some_function(request):
+    request.session['name'] = request.POST['name']
+    request.session['counter'] = 100
+
+<p>Name in session is: {{request.session.name}}</p>
+
+request.session['key']
+    This will retrieve (get) the value associated with 'key'
+
+request.session['key'] = 'value'
+    Set the value that will be stored by 'key' to 'value'
+
+'key' in request.session
+    Returns a boolean of whether a key is in session or not
+
+{{ request.session.name }}
+    Use dot notation (.) to access request.session keys from templates since square brackets ([]) aren’t allowed there
+
+del request.session['key']
+    Deletes a session key if it exists, throws a KeyError if it doesn’t. Use along with try and except since it's better to ask for forgiveness than permission
+
+Note: If you are storing a list in session that is being modified (such as an append), you will need to save the session after the append, like so:
+    request.session['my_list'] = []
+    request.session['my_list'].append("new item")
+    request.session.save()
+
+~~~~~~~~~~~~~~~~~MAKE MODELS, THEN MIGRATIONS
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+- ONE TO MANY
+class Dojo(models.Model):
+    name = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=2)
+    desc = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Ninja(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    dojo = models.ForeignKey(
+        Dojo, related_name="ninjas", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+- MANY TO MANY
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    desc = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Author(models.Model):
+    first_name = models.CharField(max_length=45)
+    last_name = models.CharField(max_length=45)
+    books = models.ManyToManyField(Book, related_name="authors")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+=> SQL BS:
+CharField
+    Any text that a user may enter. This has one required parameter, max_length, that is the maximum length of text that can be saved.
+TextField
+    Like a CharField, but with no maximum length. Your user could copy the entire text of the Harry Potter series into the field and it would save in the database correctly.
+IntegerField
+    Holds an integer value
+FloatField
+    Holds a float value; this is good for numbers with potentially varying numbers of decimal places
+DecimalField
+    This is a good field for a number with a fixed number of decimal places, like currency. There are 2 required parameters: max_digits refers to the total number of digits (before and after the decimal place), and decimal_places refers to how many decimal places.
+BooleanField
+    Holds a boolean value
+DateTimeField
+    Used for a combination of a specific date and time. This field can take two very useful optional parameters. Setting the auto_now_add argument to True adds the current date/time when an object is created. Setting auto_now=True automatically updates any time the object is modified.
+
+=> Ex/
+# class Movie(models.Model):
+#     title = models.CharField(max_length=45)
+#     description = models.TextField()
+#     release_date = models.DateTimeField()
+#     duration = models.IntegerField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+
+~~~~~~~~~~~~~~~~~SHELL
+python3 manage.py shell
+! from your_app_name_here.models import *
+
+~~~~~~~~~~~~~~~~~DB Browser
+open database
+structure
+browse data
+new record for new row
+=> remember to press write changes
+
+~~~~~~~~~~~~~~~~~Overview of Commands
+Creating a new record
+    ClassName.objects.create(field1="value for field1", field2="value for field2", etc.)
+Reading existing records
+    Methods that return a single instance of a class
+        ClassName.objects.first() - gets the first record in the table
+        ClassName.objects.last() - gets the last record in the table
+        ClassName.objects.get(id=1) - gets the record in the table with the specified id
+            this method will throw an error unless only and exactly one record matches the query
+    Methods that return a list of instances of a class
+        ClassName.objects.all() - gets all the records in the table
+        ClassName.objects.filter(field1="value for field1", etc.) - gets any records matching the query provided
+        ClassName.objects.exclude(field1="value for field1", etc.) - gets any records not matching the query provided
+Updating an existing record
+    c = ClassName.objects.get(id=1)
+    c.field_name = "some new value for field_name"
+    c.save()
+Deleting an existing record
+    c = ClassName.objects.get(id=1)
+    c.delete()
+Other helpful methods
+    Displaying records
+        ClassName.objects.get(id=1).__dict__ - shows all the values of a single record as a dictionary
+        ClassName.objects.all().values() - shows all the values of a QuerySet (i.e. multiple instances)
+Ordering records
+    ClassName.objects.all().order_by("field_name") - orders by field provided, ascending
+    ClassName.objects.all().order_by("-field_name") - orders by field provided, descending
+
+newly_created_movie = Movie.objects.create(title="The Princess Bride",description="the best movie ever",release_date="1987-09-25",duration=98)
+print(newly_created_movie.id)	# view the new movie's id
+
+
+newly_created_movie = Movie(title="The Princess Bride",description="the best movie ever",release_date="1987-09-25",duration=98)
+newly_created_movie.save()
+
+! QUERIES FOR USERS (SHELL)
+SELECT * from users_app_user
+
+User.objects.create(first_name='Jon', last_name='Kohen', email='something@something.com', age='88')
+
+User.objects.create(first_name='Kylo', last_name='Ren',
+                    email='firstorder@killthejedi.org', age='28')
+
+User.objects.create(first_name='Lily', last_name='Kohen',
+                    email='meow@MEOWWW.com', age='11')
+
+User.objects.all()
+    <QuerySet [<User: User object (1)>, <User: User object (2)>, <User: User object (3)>]>
+
+User.objects.last()
+    <User: User object (3)>
+
+User.objects.first()
+    <User: User object (1)>
+
+c = User.objects.get(id=3)
+c.last_name = "Pancakes"
+c.save()
+
+c = User.objects.get(id=2)
+c.delete()
+    (1, {'users_app.User': 1})
+
+User.objects.all().order_by("first_name").values()
+    <QuerySet [{'id': 1, 'first_name': 'Jon', 'last_name': 'Kohen', 'email': 'something@something.com', 'age': 88, 'created_at': datetime.date(2020, 8, 13), 'updated_at': datetime.date(2020, 8, 13)}, {'id': 3, 'first_name': 'Lily', 'last_name': 'Pancakes', 'email': 'meow@MEOWWW.com', 'age': 11, 'created_at': datetime.date(2020, 8, 13), 'updated_at': datetime.date(2020, 8, 13)}]>
+
+User.objects.all().order_by("-first_name").values()
+    <QuerySet [{'id': 3, 'first_name': 'Lily', 'last_name': 'Pancakes', 'email': 'meow@MEOWWW.com', 'age': 11, 'created_at': datetime.date(2020, 8, 13), 'updated_at': datetime.date(2020, 8, 13)}, {'id': 1, 'first_name': 'Jon', 'last_name': 'Kohen', 'email': 'something@something.com', 'age': 88, 'created_at': datetime.date(2020, 8, 13), 'updated_at': datetime.date(2020, 8, 13)}]>
+
+~~~~~~~connecting views to models
+# other imports
+from .models import Movie
+# show all of the data from a table
+def index(request):
+    context = {
+    	"all_the_movies": Movie.objects.all()
+    }
+    return render(request, "index.html", context)
+
+~templates
+<h1copy>All Movies</h1>
+<ul>
+{% for movie in all_the_movies %}
+    <li>{{ movie.title }}</li>
+{% endfor %}
+</ul>
+ 
+
+
+
+Features required:
+
+Login and Registration with validations. Validation errors should appear on the page. Logout as well.
+Display the logged user's wish list (top table) which includes the items logged user created and items logged user tagged to add on his own wishlist.
+Ability to move items from "Other Users' Wish List" to the logged user's wish list table.
+Ability to add new items. Validation applies.
+Individual item page which displays the list of users who added the item to their own wishlist.
+Removal of the items from wishlist table. 
+The person who added the product has an option to delete the product.

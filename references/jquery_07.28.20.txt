@@ -1,0 +1,165 @@
+<!-- ~ CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- --------------------------------------------------------------------------------------- -->
+
+<!-- ~ DEMO -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Demo</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('h1').html('hello');
+                $(
+                    'h1'.click(function () {
+                        $('p').toggle;
+                    })
+                );
+            });
+        </script>
+    </head>
+    <body>
+        <h1>CodingDojo</h1>
+    </body>
+</html>
+
+<!-- --------------------------------------------------------------------------------------- -->
+
+<!-- ~ Functions
+_Effects (functions to do some cool animation effects)
+.hide()
+.show()
+.toggle()
+.slideUp() - not available in the slim version
+.slideDown() - not available in the slim version
+.slideToggle() - not available in the slim version
+.fadeOut() - not available in the slim version
+.fadeIn() - not available in the slim version
+
+_CSS (adding or removing a class for any HTML element/DOM)
+.addClass()
+.removeClass()
+.css()
+
+_Manipulation (retrieving or setting value or text in any HTML element)
+.after()
+.append()
+.prepend()
+.attr()
+.before()
+.html() changes what’s written in selected html
+=> .text() no param (getter) retrieves text. param (setter) replaces the text w/param
+.val()
+
+_Events (functions to handle an event)
+.click()
+.hover() 
+
+~ Selecting
+_All button elements with class blue:  
+$('button.blue')
+
+_All elements with class 'blue' that are INSIDE the button elements
+$('button .blue')
+
+_All buttons AND elements with class blue:
+ $('button, .blue')
+
+_ID
+$('#button')
+
+=> $(this)
+Selects the particular element that triggered the event handler
+ex/
+$(document).ready(function() {
+    => attach a click event listener to all the img tags when the document is ready
+    $('img').click(function() {
+        $(this).hide();
+    });
+});
+
+_Vanilla JS: jQuery is usually better -->
+<script>
+    let btn = document.getElementById('btn');
+
+    btn.addEventListener('click', function () {
+        alert('hello');
+    });
+
+    btn.style.backgroundColor = 'green';
+</script>
+
+<!-- --------------------------------------------------------------------------------------- -->
+
+<!-- ~ .on() -->
+<script>
+    $(document).on('click', 'button', function () {
+        alert('you clicked a button!');
+    });
+</script>
+<!-- 
+    1. The event: Are you waiting for a click? A submit? Keydown? In this case, we are looking for a click.
+    2. Data you wish to pass to the handler (this is not required and seldom used). We're not using it here!
+    3. The target: i.e. the element you are trying to target. Here we are targeting a button. So now our search is narrowed down listening for a button to be clicked.
+    4. The function you want to run: Just the stuff you want to attach! In our case, we are just going to alert to the screen that we clicked a button-- every time a button is clicked. 
+-->
+
+<!-- --------------------------------------------------------------------------------------- -->
+
+<!-- ~CALLBACKS -->
+<!-- Dynamic coding -->
+<script>
+    function attach_h3_handlers() {
+        $('h3').click(function () {
+            alert('You clicked an H3!');
+        });
+    }
+    $(document).ready(function () {
+        attach_h3_handlers();
+        $('button').click(function () {
+            $('div').append('<h3>I am a dynamically generated H3</h3>');
+            attach_h3_handlers();
+        });
+    });
+</script>
+<body>
+    <div>
+        <button>Click me to add a new H3 tag!</button>
+        <h3>Click me to see a message!</h3>
+    </div>
+</body>
+
+<!-- --------------------------------------------------------------------------------------- -->
+
+<!-- ~ .submit event handler
+We can use the jQuery command .submit() to either submit an actual HTML form, or we can use it as an event handler. What is meant by this is that .submit() has two purposes. Let's look at some sample code. 
+
+What this code means is that when any form element is submitted, an alert box pops up with a message. In this case, the .submit() function acted as an event handler; we wrote code for the event of a form being submitted.
+-->
+<script>
+    $('form').submit(function () {
+        alert('you submitted me!');
+    });
+</script>
+
+<!-- ~ .submit to submit form
+In this case, we tell the document: "whenever an h4 tag gets clicked, submit any form." Notice this instance of .submit() code for the actual submission of a form, not for a handler to be attached. In order to understand this, be sure to experiment on your own using .submit() as both an event listener and as a method to submit a form (meaning, you actually code in the act of submitting the form).
+-->
+<script>
+    $('h4').click(function () {
+        $('form').submit();
+    });
+</script>
+
+<!-- --------------------------------------------------------------------------------------- -->
+
+<!-- ~ Return False 
+Submitting a form, actually, redirects your browser to a different page! You know that form element...
+
+-->

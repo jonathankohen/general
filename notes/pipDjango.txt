@@ -1,0 +1,29 @@
+pip list
+    - lists all pip packages installed in env
+
+deactivate
+    - deactivates env
+
+pip3 list
+    - lists all installed
+
+source py3Env/bin/activate
+    - reactivates env
+
+pip install Django==2.2.4
+    - installed Django
+
+pip freeze
+    - gave version numbers of packages installed
+
+pip freeze > requirements.txt
+    - creates a new file with the versions of packages installed
+
+pip uninstall Django
+    - uninstalled Django
+
+pip show Django
+    - showed no Django. WARNING packages not found:
+
+pip search Flask This one might take a moment to execute.
+    - shows all packages associated with Flask

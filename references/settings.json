@@ -1,0 +1,111 @@
+{
+    // WORKBENCH
+    "workbench.colorTheme": "Community Material Theme",
+    "materialTheme.accent": "Sky",
+    "workbench.iconTheme": "material-icon-theme",
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.startupEditor": "none",
+    "window.zoomLevel": 0,
+
+    // TERMINAL
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.inheritEnv": true,
+    "workbench.colorCustomizations": {
+        "terminalCursor.foreground": "#89DDFF",
+        "panel.border": "#fff",
+        "panelTitle.activeBorder": "#89DDFF",
+        "terminal.selectionBackground": "#ffcb6b2c",
+        "terminal.foreground": "#EEFFFF",
+        "terminal.border": "#fff"
+    },
+
+    // EXPLORER
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+
+    // COMMENTS
+    "editor.tokenColorCustomizations": {
+        "comments": "#999"
+    },
+    "better-comments.highlightPlainText": true,
+    "better-comments.tags": [
+        {
+            "tag": "~",
+            "color": "#C3E88D",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "-",
+            "color": "#82AAFF",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "=>",
+            "color": "#FFCB6B",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "!",
+            "color": "#F07178",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        }
+    ],
+
+    // JAVASCRIPT
+    "javascript.updateImportsOnFileMove.enabled": "always",
+
+    // SASS
+    // "liveSassCompile.settings.formats": [
+    //     {
+    //         "format": "expanded",
+    //         "extensionName": ".css",
+    //         "savePath": "/public"
+    //     }
+    // ],
+
+    // PYTHON
+    "python.languageServer": "Microsoft",
+
+    // PRETTIER
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "prettier.semi": true,
+    "prettier.trailingComma": "all",
+    "prettier.arrowParens": "avoid",
+
+    // EDITOR
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.formatOnPaste": true,
+    "editor.fontSize": 12.5,
+    "editor.formatOnSave": true,
+    "editor.renameOnType": true,
+    "editor.wordWrap": "on",
+    "vetur.format.options.tabSize": 4,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+    // EMMET
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "cSpell.userWords": [
+        "Kohen",
+        "keshet",
+        "maxlength"
+    ],
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "vsicons.presets.foldersAllDefaultIcon": true,
+    "java.refactor.renameFromFileExplorer": "autoApply"
+}
